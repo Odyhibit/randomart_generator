@@ -31,12 +31,6 @@ yourself, one move at a time, and watch the exact hex bytes that would
 produce it build up as you go.
 
 
-
-## Why not use SubtleCrypto for everything?
-
-The browser's Web Crypto API supports SHA-256 natively, but deliberately does
-not support MD5 — so `js/hash/md5.js` is a small implementation ofthe public RFC 1321 spec.
-
 ## License
 
 MIT — see [LICENSE](LICENSE).
