@@ -10,7 +10,7 @@ squinting required)?
 
 ## Try it
 
-https://odyhibit.github.io/randomart_generator/
+**[RadnomArt](https://odyhibit.github.io/randomart_generator/)**
 
 1. Type text, or paste hex bytes (e.g. a colon-separated fingerprint).
 2. Choose **Hash mode** (matches how `ssh-keygen` really works — your input
@@ -25,7 +25,7 @@ https://odyhibit.github.io/randomart_generator/
 See [docs/algorithm.md](docs/algorithm.md) for the full algorithm write-up,
 including the exact bit-order/clamping/capping rules.
 
-Or go the other way: **[draw.html](draw.html)** is an Etch-a-Sketch-style
+Or go the other way: **[Draw](https://odyhibit.github.io/randomart_generator/draw.html)** is an Etch-a-Sketch-style
 page where you click 4 diagonal-direction buttons to hand-build the walk
 yourself, one move at a time, and watch the exact hex bytes that would
 produce it build up as you go.
