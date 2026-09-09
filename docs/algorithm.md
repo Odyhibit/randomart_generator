@@ -5,8 +5,7 @@ OpenSSH's `ssh-keygen -lv`, and how this project reimplements it.
 
 ## Where it comes from
 
-Despite sometimes being associated with OpenSSL, this visualization is part
-of **OpenSSH** — OpenSSL has no randomart feature. It implements the
+This visualization is part of **OpenSSH**. It implements the
 "drunken bishop" hash-visualization technique described by Adrian Perrig and
 Dawn Song in their 1999 paper *"Hash Visualization: A New Technique to
 Improve Real-World Security."* The idea: humans are much better at noticing
