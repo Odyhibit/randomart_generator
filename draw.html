@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Randomart Etch-a-Sketch</title>
+  <meta
+    name="description"
+    content="Draw your own randomart by hand, one diagonal move at a time, and watch the hex that would produce it build up as you go."
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>Randomart Etch-a-Sketch</h1>
+    <p class="subtitle">
+      <a href="index.html">← Back to the Randomart Visualizer</a><br />
+      Every move the bishop makes comes from 2 bits: <strong>4 possible diagonal directions</strong>. Click them
+      yourself, one at a time — like an Etch-A-Sketch that can never lift its pen — and watch both the picture and
+      the exact bytes that would produce it build up together.
+    </p>
+  </header>
+
+  <main>
+    <section class="explainer" aria-labelledby="explainer-heading">
+      <h2 id="explainer-heading">How this works</h2>
+      <p>
+        Every 4 clicks complete one byte — your first click becomes that byte's <em>lowest</em> 2 bits, your fourth
+        click becomes its <em>highest</em> 2 bits (the walk always consumes bits low-end-first; see
+        <a href="docs/algorithm.md">docs/algorithm.md</a>). Once you've completed a byte, you can click
+        <strong>Finish (place E)</strong> to mark the current position as the end of the walk, exactly like a real
+        randomart box — or keep drawing right past it.
+      </p>
+    </section>
+
+    <section class="visualization" aria-labelledby="viz-heading">
+      <h2 id="viz-heading" class="visually-hidden">Drawing</h2>
+
+      <div id="grid" class="grid-container"></div>
+
+      <div class="dpad" role="group" aria-label="Move direction">
+        <button id="btn-up-left" type="button" class="dpad-btn dpad-ul" aria-label="Up-left">↖</button>
+        <button id="btn-up-right" type="button" class="dpad-btn dpad-ur" aria-label="Up-right">↗</button>
+        <button id="btn-down-left" type="button" class="dpad-btn dpad-dl" aria-label="Down-left">↙</button>
+        <button id="btn-down-right" type="button" class="dpad-btn dpad-dr" aria-label="Down-right">↘</button>
+      </div>
+
+      <p id="narration" class="narration" aria-live="polite"></p>
+
+      <div class="transport">
+        <button id="btn-undo" type="button">Undo</button>
+        <button id="btn-reset" type="button">Reset</button>
+        <button id="btn-finish" type="button">Finish (place E)</button>
+      </div>
+
+      <div class="final-box-wrap">
+        <h3>Bytes so far <button id="btn-copy" type="button">Copy hex</button></h3>
+        <p id="byte-progress" class="mode-note"></p>
+        <pre id="hex-output" class="final-box"></pre>
+        <p>
+          <a id="open-in-main" href="index.html">Open these bytes in the main tool (Raw mode) →</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>MIT licensed, open source.</p>
+  </footer>
+
+  <script type="module" src="js/drawMain.js"></script>
+</body>
+</html>

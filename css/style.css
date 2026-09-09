@@ -218,6 +218,38 @@ textarea {
   outline-offset: -2px;
 }
 
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(2, 4.5rem);
+  grid-template-rows: repeat(2, 4.5rem);
+  gap: 0.5rem;
+  margin: 1rem 0;
+  width: fit-content;
+}
+
+.dpad-btn {
+  font-size: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.dpad-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.dpad-btn:active {
+  background: var(--cell-current-bg);
+}
+
+.dpad-ul { grid-column: 1; grid-row: 1; }
+.dpad-ur { grid-column: 2; grid-row: 1; }
+.dpad-dl { grid-column: 1; grid-row: 2; }
+.dpad-dr { grid-column: 2; grid-row: 2; }
+
 .narration {
   min-height: 2.5em;
   margin-top: 0.75rem;

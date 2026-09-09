@@ -161,7 +161,17 @@ async function recompute() {
   renderAtCursor(0);
 }
 
+/** Support arriving from draw.html's "Open in main tool" link: ?raw=<hex> pre-fills Hex + Raw mode. */
+function applyIncomingRawParam() {
+  const hex = new URLSearchParams(location.search).get("raw");
+  if (!hex) return;
+  document.querySelector('input[name="format"][value="hex"]').checked = true;
+  document.querySelector('input[name="mode"][value="raw"]').checked = true;
+  els.input.value = hex;
+}
+
 export function initUI() {
+  applyIncomingRawParam();
   updateModeNote();
   recompute();
 
