@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Randomart Visualizer — how ssh-keygen draws fingerprints</title>
+  <meta
+    name="description"
+    content="An interactive, step-by-step teaching tool for OpenSSH's 'drunken bishop' randomart algorithm."
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="page-header">
+    <h1>Randomart Visualizer</h1>
+    <p class="subtitle">
+      See exactly how <code>ssh-keygen -lv</code> turns a key fingerprint into its little ASCII-art picture —
+      the &ldquo;drunken bishop&rdquo; walk, one step at a time.
+    </p>
+  </header>
+
+  <main>
+    <section class="explainer" aria-labelledby="explainer-heading">
+      <h2 id="explainer-heading">What am I looking at?</h2>
+      <p>
+        When you run <code>ssh-keygen -lv</code> on a key, it hashes the key and then walks a virtual
+        &ldquo;bishop&rdquo; chess piece around a 17×9 grid, using two bits from the hash at a time to decide
+        which diagonal direction to move. Cells get a character based on how many times the bishop visits them,
+        the start is marked <strong>S</strong>, and where the walk ends is marked <strong>E</strong>. The result is
+        a small picture that's much easier for a human to eyeball-compare than a long string of hex — two keys
+        that produce visibly different art are obviously different keys.
+      </p>
+      <p>
+        This algorithm comes from OpenSSH (not OpenSSL, which has no randomart feature) — it implements the
+        &ldquo;drunken bishop&rdquo; hash-visualization technique described by
+        Adrian Perrig and Dawn Song's paper &ldquo;Hash Visualization: A New Technique to Improve Real-World
+        Security&rdquo; (1999). See <a href="docs/algorithm.md">docs/algorithm.md</a> for the full algorithm
+        write-up.
+      </p>
+    </section>
+
+    <section class="controls" aria-labelledby="controls-heading">
+      <h2 id="controls-heading" class="visually-hidden">Input</h2>
+
+      <fieldset>
+        <legend>Input format</legend>
+        <label><input type="radio" name="format" value="hex" /> Hex</label>
+        <label><input type="radio" name="format" value="text" checked /> Text</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Mode</legend>
+        <label><input type="radio" name="mode" value="hash" checked /> Hash my input</label>
+        <label><input type="radio" name="mode" value="raw" /> Use raw bytes (no hashing)</label>
+      </fieldset>
+
+      <fieldset id="hash-alg-fieldset">
+        <legend>Hash algorithm</legend>
+        <label><input type="radio" name="hashAlg" value="md5" checked /> MD5</label>
+        <label><input type="radio" name="hashAlg" value="sha256" /> SHA256</label>
+      </fieldset>
+
+      <p id="mode-note" class="mode-note" role="note"></p>
+
+      <label class="input-label" for="input-text">
+        Input (hex digits, or plain text — try pasting a real key fingerprint's hex)
+      </label>
+      <textarea id="input-text" rows="3" spellcheck="false">hello, world!</textarea>
+      <p id="input-error" class="error" role="alert" hidden></p>
+
+      <p class="example-hint">
+        Want to see it match a real <code>ssh-keygen -lv</code> output exactly?
+        <button id="btn-load-example" type="button">Load a real key's MD5 fingerprint (raw mode)</button>
+      </p>
+
+      <div class="byte-dump-wrap">
+        <span class="byte-dump-label">Bytes being walked:</span>
+        <div id="byte-dump" class="byte-dump" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="visualization" aria-labelledby="viz-heading">
+      <h2 id="viz-heading" class="visually-hidden">Walk visualization</h2>
+
+      <div id="grid" class="grid-container"></div>
+
+      <p id="narration" class="narration" aria-live="polite"></p>
+
+      <div class="transport">
+        <button id="btn-reset" type="button">Reset</button>
+        <button id="btn-step-back" type="button">◀ Step</button>
+        <button id="btn-play-pause" type="button">Play</button>
+        <button id="btn-step-forward" type="button">Step ▶</button>
+        <label class="scrubber-label">
+          Step
+          <input id="scrubber" type="range" min="0" max="0" value="0" />
+        </label>
+        <label class="speed-label">
+          Speed
+          <input id="speed" type="range" min="1" max="60" value="8" />
+        </label>
+      </div>
+
+      <div id="final-box-wrap" class="final-box-wrap" hidden>
+        <h3>Randomart box <button id="btn-copy" type="button">Copy</button></h3>
+        <pre id="final-box" class="final-box"></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>MIT licensed, open source — a teaching tool, not a security product.</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

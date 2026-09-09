@@ -1,0 +1,30 @@
+[
+  {
+    "description": "ED25519 test key, MD5 fingerprint (captured with: ssh-keygen -E md5 -lvf key.pub)",
+    "digestHex": "c7d2e03c1a552c7e3af8eeb2207a773d",
+    "titleLabel": "[ED25519 256]",
+    "footerLabel": "[MD5]",
+    "expectedBox": "+--[ED25519 256]--+\n|         ..      |\n|        ...      |\n|       .o.       |\n|       +.+.      |\n|      ..So+      |\n|      .oo+       |\n|  . . .o .       |\n| .....o E        |\n|.. . ..=o.       |\n+------[MD5]------+"
+  },
+  {
+    "description": "ED25519 test key, SHA256 fingerprint (captured with: ssh-keygen -E sha256 -lvf key.pub)",
+    "digestHex": "263c601715ce2b7d4d07f2bfb5bd210b3aacb0ddb33638613398793d1b0c8cf3",
+    "titleLabel": "[ED25519 256]",
+    "footerLabel": "[SHA256]",
+    "expectedBox": "+--[ED25519 256]--+\n|      ..o.. .    |\n|       +   o .   |\n|    o + o   o .  |\n|   . * + . o o   |\n|      @ S . . . .|\n|     + E *     oo|\n|     .o * +. ..o.|\n|      +o.B. . o o|\n|     . o++=  . . |\n+----[SHA256]-----+"
+  },
+  {
+    "description": "RSA 2048 test key, MD5 fingerprint (captured with: ssh-keygen -E md5 -lvf key.pub)",
+    "digestHex": "ecaa0e28522a971b94575d688dbc56cf",
+    "titleLabel": "[RSA 2048]",
+    "footerLabel": "[MD5]",
+    "expectedBox": "+---[RSA 2048]----+\n|       . +.      |\n|       .=.o      |\n|      ...o o     |\n|   . . .o   E    |\n|  + .  .S        |\n| = o   .         |\n|* =     .        |\n|+. +   .         |\n|  ..o..          |\n+------[MD5]------+"
+  },
+  {
+    "description": "RSA 2048 test key, SHA256 fingerprint (captured with: ssh-keygen -E sha256 -lvf key.pub)",
+    "digestHex": "695742a251ef3b808e9c2e00767b16a581336306055c9bad8f5ffcdad2069683",
+    "titleLabel": "[RSA 2048]",
+    "footerLabel": "[SHA256]",
+    "expectedBox": "+---[RSA 2048]----+\n|.o=o. ..o .      |\n| . B+. + +       |\n|  oo+.=   o .    |\n|.. ..o . o o     |\n|o ... + S o      |\n|.  ooE.* o .     |\n| . .*.oo+ o      |\n|  ... ..oo .     |\n|   ... .+o       |\n+----[SHA256]-----+"
+  }
+]
