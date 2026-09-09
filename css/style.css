@@ -224,6 +224,13 @@ textarea {
   font-size: 0.95rem;
 }
 
+.narration .bit-highlight {
+  color: var(--accent);
+  background: var(--cell-current-bg);
+  padding: 0 0.15em;
+  border-radius: 3px;
+}
+
 .transport {
   display: flex;
   flex-wrap: wrap;

@@ -96,7 +96,7 @@ function renderAtCursor(cursor) {
 
   if (cursor > 0) {
     const step = steps[cursor - 1];
-    els.narration.textContent = describeStep(step, currentBytes[step.byteIndex]);
+    els.narration.innerHTML = describeStep(step, currentBytes[step.byteIndex]);
     renderByteDump(currentBytes, step.byteIndex);
   } else {
     els.narration.textContent = steps.length

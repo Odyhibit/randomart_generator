@@ -77,6 +77,13 @@ const DIRECTION_NAMES = {
  * Produces a plain-language description of a single micro-move, for the
  * narration panel. Pure function, independently testable.
  *
+ * Returns an HTML string (not plain text) — the 2 bits this step consumed
+ * are wrapped in <strong> within the byte's binary representation, so
+ * students can see at a glance which two bits map to "pair N of 4". Safe to
+ * build as a raw string since every value going into it (byteValue, step.*)
+ * is our own computed data, never user-controlled text. Callers must render
+ * it with innerHTML, not textContent.
+ *
  * @param {object} step - one entry from drunkenBishop().steps
  * @param {number} byteValue - the original byte this step's bits came from
  */
@@ -92,8 +99,20 @@ export function describeStep(step, byteValue) {
         : step.clampedY
           ? " (bounced off the top/bottom edge)"
           : "";
+
+  // Bits are consumed low-bits-first: subIndex 0 is bits 0-1 (the rightmost
+  // pair in this MSB-first display string), subIndex 3 is bits 6-7 (the
+  // leftmost pair). Each subIndex step moves the highlighted pair two
+  // characters to the left.
+  const highlightAt = 6 - step.subIndex * 2;
+  const highlightedByte =
+    byteBinary.slice(0, highlightAt) +
+    `<strong class="bit-highlight">${byteBinary.slice(highlightAt, highlightAt + 2)}</strong>` +
+    byteBinary.slice(highlightAt + 2);
+
   return (
-    `Byte ${step.byteIndex} = 0x${byteValue.toString(16).padStart(2, "0")} (${byteBinary}). ` +
-    `Reading 2 bits at a time from the low end, pair ${step.subIndex + 1} of 4 = ${bitsBinary} → move ${dir}${wall}.`
+    `Byte ${step.byteIndex} = 0x${byteValue.toString(16).padStart(2, "0")} (${highlightedByte}). ` +
+    `Reading 2 bits at a time from the low end, pair ${step.subIndex + 1} of 4 = ` +
+    `<strong class="bit-highlight">${bitsBinary}</strong> → move ${dir}${wall}.`
   );
 }
